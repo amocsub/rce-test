@@ -5,9 +5,12 @@ on:
       variable:
         description: The RCE command to execute
         default: '"; YOUR_COMMAND # '
+  issues:
+    type: labeled
+
 jobs:
   rce-test:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "${{ github.event.inputs.variable }}"
+          echo "${{ github.event.issue.title }}"
