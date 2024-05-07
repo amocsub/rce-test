@@ -1,11 +1,23 @@
 name: rce-test
 on:
+  workflow_dispatch:
+    inputs:
+      variable:
+        description: The RCE command to execute
+        default: '"; YOUR_COMMAND # '
+  issues:
   pull_request:
 
 jobs:
   rce-test:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "${{ secrets.MY_SECRET }}" >> secrets.txt
-          cat secrets.txt | base64
+      - if: ${{ github.event_name == 'issue' }}
+        run: |
+          echo "${{ github.event.issue.title }}"
+      - if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          echo "${{ github.event.pull_request.title }}"
+      - if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          echo "${{ github.event.inputs.variable }}"
