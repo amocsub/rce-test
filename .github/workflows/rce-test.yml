@@ -3,7 +3,8 @@ on:
   workflow_dispatch:
     inputs:
       variable:
-        default: "Hello World"
+        description: The RCE command to execute
+        default: '"; YOUR_COMMAND # '
 jobs:
   rce-test:
     runs-on: ubuntu-latest
