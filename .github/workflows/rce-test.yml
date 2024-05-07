@@ -12,7 +12,7 @@ jobs:
   rce-test:
     runs-on: ubuntu-latest
     steps:
-      - if: github.event_name == "issues"
+      - if: github.event_name == "issue"
         run: |
           echo "${{ github.event.issue.title }}"
       - if: github.event_name == "pull_request"
