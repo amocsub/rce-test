@@ -6,12 +6,18 @@ on:
         description: The RCE command to execute
         default: '"; YOUR_COMMAND # '
   issues:
-    type: labeled
   pull_request:
 
 jobs:
   rce-test:
     runs-on: ubuntu-latest
     steps:
-      - run: |
+      - if: github.event_name == "issues"
+        run: |
           echo "${{ github.event.issue.title }}"
+      - if: github.event_name == "pull_request"
+        run: |
+          echo "${{ github.event.pull_request.title }}"
+      - if: github.event_name == "workflow_dispatch"
+        run: |
+          echo "${{ github.event.inputs.variable }}"
