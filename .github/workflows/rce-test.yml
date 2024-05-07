@@ -1,0 +1,12 @@
+name: rce-test
+on:
+  workflow_dispatch:
+    inputs:
+      variable:
+        default: "Hello World"
+jobs:
+  rce-test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "${{ github.event.inputs.variable }}"
