@@ -19,7 +19,6 @@ jobs:
       - if: ${{ github.event_name == 'issues' }}
         run: |
           echo "${{ github.event.issue.title }}"
-          sleep 99999
         env:
           MY_SECRET: ${{ secrets.MY_SECRET }}
           MY_GITHUB_TOKEN: ${{ github.token }}
